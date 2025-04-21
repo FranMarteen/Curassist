@@ -1,0 +1,59 @@
+generator client {
+  provider = "prisma-client-js"
+  output   = "./node_modules/@prisma/client"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model usuarios {
+  id           Int          @id @default(autoincrement())
+  nome         String
+  email        String       @unique
+  senha_hash   String
+  role         String?
+  curatelados  curatelados[]
+
+  @@map("usuarios")
+}
+
+model curatelados {
+  id                    Int          @id @default(autoincrement())
+  nome                  String
+  data_nascimento       DateTime?
+  cpf                   String?
+  usuario_responsavel_id Int         
+  usuario_responsavel   usuarios     @relation(fields: [usuario_responsavel_id], references: [id])
+  tarefas               tarefas[]
+  documentos            documentos[]
+
+  @@map("curatelados")
+}
+
+model tarefas {
+  id              Int        @id @default(autoincrement())
+  titulo          String
+  descricao       String?
+  data_vencimento DateTime?
+  prioridade      String?
+  status          String?
+  curatelado_id   Int        
+  curatelado      curatelados @relation(fields: [curatelado_id], references: [id])
+
+  @@map("tarefas")
+}
+
+model documentos {
+  id             Int        @id @default(autoincrement())
+  nome           String
+  tipo           String?
+  data_upload    DateTime?
+  data_validade  DateTime?
+  curatelado_id  Int        
+  curatelado     curatelados @relation(fields: [curatelado_id], references: [id])
+  url_arquivo    String?
+
+  @@map("documentos")
+}

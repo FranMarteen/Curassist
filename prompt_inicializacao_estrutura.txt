@@ -1,0 +1,30 @@
+Crie a estrutura básica de pastas e arquivos de configuração para um projeto Node.js com as seguintes características:
+
+- Backend em Node.js com Express
+- Frontend em React
+- Banco de dados Prisma
+- Gerenciamento de pacotes npm
+- Controle de versão Git
+
+A estrutura deve incluir:
+
+- Uma pasta "backend" para o código do servidor
+- Uma pasta "frontend" para o código da interface do usuário
+- Um arquivo "package.json" na raiz do projeto
+- Um arquivo ".gitignore" na raiz do projeto
+- Um arquivo "README.md" na raiz do projeto
+- Dentro da pasta "backend":
+  - Uma pasta "src" para o código fonte do servidor
+  - Um arquivo "index.ts" como ponto de entrada do servidor
+  - Uma pasta "routes" para as rotas do servidor
+  - Uma pasta "controllers" para os controllers do servidor
+  - Uma pasta "models" para os modelos do servidor
+  - Uma pasta "middlewares" para os middlewares do servidor
+  - Uma pasta "db" para a configuração do banco de dados
+  - Um arquivo "prisma/schema.prisma" para o schema do Prisma
+- Dentro da pasta "frontend":
+  - Uma pasta "src" para o código fonte da interface do usuário
+  - Uma pasta "components" para os componentes React
+  - Uma pasta "pages" para as páginas React
+  - Uma pasta "styles" para os estilos CSS
+  - Um arquivo "index.tsx" como ponto de entrada da interface do usuário
