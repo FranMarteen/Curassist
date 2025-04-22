@@ -1,5 +1,6 @@
 generator client {
   provider = "prisma-client-js"
+  output   = "../backend/node_modules/.prisma/client"
 }
 
 datasource db {
@@ -28,6 +29,7 @@ model Curatelado {
   userId String
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
+  documents Document[]
 }
 
 model Tarefa {
@@ -40,8 +42,10 @@ model Tarefa {
   prioridade  String?
   anotacoes   String?
   tags        String?
-  subtarefas  String?
   arquivosAnexos String?
+  subtarefas Tarefa[] @relation(name: "Subtarefas")
+  tarefa Tarefa? @relation(name: "Subtarefas", fields: [tarefaId], references: [id])
+  tarefaId String?
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 }
@@ -57,6 +61,16 @@ model Obrigacao {
   anotacoes   String?
   tags        String?
   arquivosAnexos String?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Document {
+  id        String   @id @default(uuid())
+  filename  String
+  filepath  String
+  curatelado   Curatelado @relation(fields: [curateladoId], references: [id])
+  curateladoId String
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 }
